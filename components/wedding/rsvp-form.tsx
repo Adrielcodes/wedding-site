@@ -12,17 +12,48 @@ import { Check, Heart } from "lucide-react"
 export function RSVPForm() {
   const [submitted, setSubmitted] = useState(false)
   const [attendance, setAttendance] = useState<string>("")
+  const [guests, setGuests] = useState<string>("")
+  const [meal, setMeal] = useState<string>("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setErrorMessage(null)
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setSubmitted(true)
-    setIsSubmitting(false)
+
+    try {
+      const formData = new FormData(e.currentTarget)
+      const payload = {
+        firstName: String(formData.get("firstName") ?? "").trim(),
+        lastName: String(formData.get("lastName") ?? "").trim(),
+        email: String(formData.get("email") ?? "").trim(),
+        attendance,
+        guests: attendance === "yes" ? guests : null,
+        meal: attendance === "yes" ? meal : null,
+        dietary: attendance === "yes" ? String(formData.get("dietary") ?? "").trim() : "",
+        message: String(formData.get("message") ?? "").trim(),
+      }
+
+      const response = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(body?.error || "Could not submit RSVP right now. Please try again.")
+      }
+
+      setSubmitted(true)
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Could not submit RSVP right now. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -112,7 +143,13 @@ export function RSVPForm() {
               </Label>
               <RadioGroup
                 value={attendance}
-                onValueChange={setAttendance}
+                onValueChange={(value) => {
+                  setAttendance(value)
+                  if (value !== "yes") {
+                    setGuests("")
+                    setMeal("")
+                  }
+                }}
                 className="flex gap-6"
               >
                 <div className="flex items-center space-x-2">
@@ -137,7 +174,7 @@ export function RSVPForm() {
                   <Label htmlFor="guests" className="font-sans text-foreground">
                     Number of Guests
                   </Label>
-                  <Select name="guests" required>
+                  <Select value={guests} onValueChange={setGuests} required>
                     <SelectTrigger className="bg-background border-border">
                       <SelectValue placeholder="Select number of guests" />
                     </SelectTrigger>
@@ -155,7 +192,7 @@ export function RSVPForm() {
                   <Label htmlFor="meal" className="font-sans text-foreground">
                     Meal Preference
                   </Label>
-                  <Select name="meal" required>
+                  <Select value={meal} onValueChange={setMeal} required>
                     <SelectTrigger className="bg-background border-border">
                       <SelectValue placeholder="Select your meal preference" />
                     </SelectTrigger>
@@ -199,10 +236,16 @@ export function RSVPForm() {
               />
             </div>
 
+            {errorMessage && (
+              <p className="text-sm font-sans text-destructive" role="alert">
+                {errorMessage}
+              </p>
+            )}
+
             {/* Submit Button */}
             <Button
               type="submit"
-              disabled={isSubmitting || !attendance}
+              disabled={isSubmitting || !attendance || (attendance === "yes" && (!guests || !meal))}
               className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-sans tracking-wide"
             >
               {isSubmitting ? (
