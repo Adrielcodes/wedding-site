@@ -49,9 +49,18 @@ export async function POST(request: Request) {
     const smtpFrom = process.env.SMTP_FROM ?? smtpUser
     const rsvpToEmail = process.env.RSVP_TO_EMAIL ?? "zamiadrielwedding@gmail.com"
 
-    if (!smtpHost || !smtpUser || !smtpPass || !smtpFrom) {
+    const missingEnv = [
+      ["SMTP_HOST", smtpHost],
+      ["SMTP_USER", smtpUser],
+      ["SMTP_PASS", smtpPass],
+      ["SMTP_FROM", smtpFrom],
+    ].filter(([, value]) => !value).map(([key]) => key)
+
+    if (missingEnv.length > 0) {
       return NextResponse.json(
-        { error: "Email service is not configured. Please set SMTP environment variables." },
+        {
+          error: `Email service is not configured. Missing: ${missingEnv.join(", ")}. Update .env.local and restart the server.`,
+        },
         { status: 500 }
       )
     }
