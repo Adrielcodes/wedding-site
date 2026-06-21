@@ -4,102 +4,113 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Romantic Wedding Color Palette */
-  /* Ivory/Cream Background */
-  --background: oklch(0.98 0.01 80);
-  --foreground: oklch(0.25 0.02 50);
-  
-  /* Card - Soft white */
-  --card: oklch(0.99 0.005 80);
-  --card-foreground: oklch(0.25 0.02 50);
-  
+  /* Luxury Wedding — Forest Green · Black · Dark Gold */
+
+  /* Luxury dark forest green — main background */
+  --background: oklch(0.083 0.032 148);
+  --foreground: oklch(0.92 0.014 85);
+
+  /* Card — same family, very slightly lighter */
+  --card: oklch(0.095 0.028 148);
+  --card-foreground: oklch(0.92 0.014 85);
+
   /* Popover */
-  --popover: oklch(0.99 0.005 80);
-  --popover-foreground: oklch(0.25 0.02 50);
-  
-  /* Primary - Blush Pink */
-  --primary: oklch(0.75 0.08 10);
-  --primary-foreground: oklch(0.98 0.01 80);
-  
-  /* Secondary - Soft Ivory */
-  --secondary: oklch(0.95 0.02 80);
-  --secondary-foreground: oklch(0.30 0.02 50);
-  
-  /* Muted - Light blush */
-  --muted: oklch(0.94 0.03 15);
-  --muted-foreground: oklch(0.45 0.02 50);
-  
-  /* Accent - Gold */
-  --accent: oklch(0.75 0.12 85);
-  --accent-foreground: oklch(0.25 0.02 50);
-  
+  --popover: oklch(0.095 0.028 148);
+  --popover-foreground: oklch(0.92 0.014 85);
+
+  /* Primary — mid forest green */
+  --primary: oklch(0.32 0.1 155);
+  --primary-foreground: oklch(0.96 0.015 85);
+
+  /* Secondary — dark warm forest-brown (same family, slightly warmer) */
+  --secondary: oklch(0.090 0.022 118);
+  --secondary-foreground: oklch(0.92 0.014 85);
+
+  /* Muted */
+  --muted: oklch(0.13 0.020 135);
+  --muted-foreground: oklch(0.62 0.022 85);
+
+  /* Accent — Rich antique gold */
+  --accent: oklch(0.68 0.14 78);
+  --accent-foreground: oklch(0.07 0 0);
+
+  /* ── Named palette tokens — Gold · Forest Green · Ivory · Black ── */
+  --gold: oklch(0.68 0.14 78);
+  --gold-bright: oklch(0.84 0.11 88);
+  --gold-deep: oklch(0.52 0.11 72);
+  --ivory: oklch(0.95 0.018 92);
+  --ivory-dim: oklch(0.88 0.02 92);
+  --forest: oklch(0.083 0.032 148);
+  --forest-light: oklch(0.16 0.05 150);
+  --ink: oklch(0.05 0.01 150);
+
   /* Destructive */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  
-  /* Border - Soft blush/gold */
-  --border: oklch(0.88 0.03 60);
-  --input: oklch(0.92 0.02 60);
-  --ring: oklch(0.70 0.10 85);
-  
+
+  /* Border — dark gold */
+  --border: oklch(0.28 0.04 78);
+  --input: oklch(0.13 0.018 120);
+  --ring: oklch(0.68 0.14 78);
+
   /* Charts */
-  --chart-1: oklch(0.75 0.08 10);
-  --chart-2: oklch(0.75 0.12 85);
-  --chart-3: oklch(0.65 0.06 30);
-  --chart-4: oklch(0.85 0.05 80);
-  --chart-5: oklch(0.55 0.08 50);
-  
-  --radius: 0.5rem;
-  
+  --chart-1: oklch(0.24 0.09 155);
+  --chart-2: oklch(0.68 0.14 78);
+  --chart-3: oklch(0.38 0.08 155);
+  --chart-4: oklch(0.82 0.08 78);
+  --chart-5: oklch(0.52 0.06 155);
+
+  --radius: 0.125rem;
+
   /* Sidebar */
-  --sidebar: oklch(0.97 0.01 80);
-  --sidebar-foreground: oklch(0.25 0.02 50);
-  --sidebar-primary: oklch(0.75 0.08 10);
-  --sidebar-primary-foreground: oklch(0.98 0.01 80);
-  --sidebar-accent: oklch(0.94 0.03 15);
-  --sidebar-accent-foreground: oklch(0.30 0.02 50);
-  --sidebar-border: oklch(0.88 0.03 60);
-  --sidebar-ring: oklch(0.70 0.10 85);
+  --sidebar: oklch(0.095 0.028 148);
+  --sidebar-foreground: oklch(0.92 0.014 85);
+  --sidebar-primary: oklch(0.32 0.1 155);
+  --sidebar-primary-foreground: oklch(0.96 0.015 85);
+  --sidebar-accent: oklch(0.13 0.020 135);
+  --sidebar-accent-foreground: oklch(0.92 0.014 85);
+  --sidebar-border: oklch(0.28 0.04 78);
+  --sidebar-ring: oklch(0.68 0.14 78);
 }
 
 .dark {
-  --background: oklch(0.18 0.01 50);
-  --foreground: oklch(0.95 0.01 80);
-  --card: oklch(0.20 0.01 50);
-  --card-foreground: oklch(0.95 0.01 80);
-  --popover: oklch(0.20 0.01 50);
-  --popover-foreground: oklch(0.95 0.01 80);
-  --primary: oklch(0.80 0.08 10);
-  --primary-foreground: oklch(0.20 0.01 50);
-  --secondary: oklch(0.30 0.01 50);
-  --secondary-foreground: oklch(0.95 0.01 80);
-  --muted: oklch(0.30 0.02 50);
-  --muted-foreground: oklch(0.70 0.02 80);
-  --accent: oklch(0.70 0.12 85);
-  --accent-foreground: oklch(0.95 0.01 80);
+  --background: oklch(0.07 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.10 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.10 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.40 0.09 155);
+  --primary-foreground: oklch(0.07 0 0);
+  --secondary: oklch(0.14 0 0);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.62 0 0);
+  --accent: oklch(0.72 0.12 82);
+  --accent-foreground: oklch(0.07 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.35 0.02 50);
-  --input: oklch(0.35 0.02 50);
-  --ring: oklch(0.65 0.10 85);
-  --chart-1: oklch(0.80 0.08 10);
-  --chart-2: oklch(0.75 0.12 85);
-  --chart-3: oklch(0.70 0.06 30);
-  --chart-4: oklch(0.85 0.05 80);
-  --chart-5: oklch(0.60 0.08 50);
-  --sidebar: oklch(0.22 0.01 50);
-  --sidebar-foreground: oklch(0.95 0.01 80);
-  --sidebar-primary: oklch(0.80 0.08 10);
-  --sidebar-primary-foreground: oklch(0.20 0.01 50);
-  --sidebar-accent: oklch(0.30 0.02 50);
-  --sidebar-accent-foreground: oklch(0.95 0.01 80);
-  --sidebar-border: oklch(0.35 0.02 50);
-  --sidebar-ring: oklch(0.65 0.10 85);
+  --border: oklch(0.22 0.02 82);
+  --input: oklch(0.22 0 0);
+  --ring: oklch(0.72 0.12 82);
+  --chart-1: oklch(0.40 0.09 155);
+  --chart-2: oklch(0.72 0.12 82);
+  --chart-3: oklch(0.55 0.08 155);
+  --chart-4: oklch(0.85 0.07 82);
+  --chart-5: oklch(0.62 0.05 155);
+  --sidebar: oklch(0.10 0 0);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.40 0.09 155);
+  --sidebar-primary-foreground: oklch(0.07 0 0);
+  --sidebar-accent: oklch(0.18 0 0);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.22 0.02 82);
+  --sidebar-ring: oklch(0.72 0.12 82);
 }
 
 @theme inline {
-  --font-sans: var(--font-sans), 'Lato', system-ui, sans-serif;
-  --font-serif: var(--font-serif), 'Playfair Display', Georgia, serif;
+  --font-sans: var(--font-sans), 'Jost', system-ui, sans-serif;
+  --font-serif: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -115,6 +126,14 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-ivory: var(--ivory);
+  --color-ivory-dim: var(--ivory-dim);
+  --color-forest: var(--forest);
+  --color-forest-light: var(--forest-light);
+  --color-ink: var(--ink);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -146,4 +165,277 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ─── Scroll reveal — bidirectional ─────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal.from-above {
+  transform: translateY(-44px);
+}
+.scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) !important;
+}
+.scroll-reveal-delay-1 { transition-delay: 0.15s; }
+.scroll-reveal-delay-2 { transition-delay: 0.30s; }
+.scroll-reveal-delay-3 { transition-delay: 0.45s; }
+.scroll-reveal-delay-4 { transition-delay: 0.60s; }
+
+/* ─── Gold divider ───────────────────────────────────────────── */
+.gold-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* ─── Luxury label ───────────────────────────────────────────── */
+.luxury-label {
+  font-family: var(--font-sans);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+/* ─── Shimmer on gold text ────────────────────────────────────── */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.gold-shimmer {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(180,148,60,0.85) 0%,
+    rgba(201,168,76,1)    35%,
+    rgba(255,225,130,1)   50%,
+    rgba(201,168,76,1)    65%,
+    rgba(180,148,60,0.85) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: goldShimmer 5s linear infinite;
+}
+
+/* ─── Floating particle ──────────────────────────────────────── */
+@keyframes floatDrift {
+  0%   { transform: translateY(0px)   translateX(0px)  rotate(0deg);   opacity: 0;   }
+  8%   { opacity: 0.55; }
+  92%  { opacity: 0.55; }
+  100% { transform: translateY(-120px) translateX(var(--dx,12px)) rotate(360deg); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatDrift var(--dur, 8s) ease-in-out var(--delay, 0s) infinite;
+}
+
+/* ─── Reveal from left / right (for staggered side entries) ─── */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-56px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(56px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.in-view,
+.reveal-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Subtle pulse on ornament dots ─────────────────────────── */
+@keyframes ornamentPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.85; }
+}
+
+/* ─── Section entrance — clip reveal on headings ────────────── */
+@keyframes clipReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+.heading-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.heading-reveal.in-view {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   COOL FACTOR — extended motion & finish library
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Static gold gradient text (no shimmer) ─────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(120deg, var(--gold-deep), var(--gold-bright) 45%, var(--gold) 70%, var(--gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Top scroll-progress bar ────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright), var(--gold));
+  z-index: 10000;
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.6);
+  will-change: transform;
+}
+
+/* ─── Gold cursor-follow glow ────────────────────────────────── */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate3d(var(--cx, -50%), var(--cy, -50%), 0) translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.10) 0%, rgba(201, 168, 76, 0.04) 35%, transparent 68%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.cursor-glow.active { opacity: 1; }
+
+/* ─── Animated aurora backdrop ───────────────────────────────── */
+@keyframes auroraShift {
+  0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg)   scale(1.1); }
+  50%  { transform: translate3d(6%, 4%, 0)  rotate(180deg)  scale(1.25); }
+  100% { transform: translate3d(-6%, -4%, 0) rotate(360deg) scale(1.1); }
+}
+.aurora {
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 50% at 30% 35%, rgba(34, 84, 52, 0.55) 0%, transparent 60%),
+    radial-gradient(36% 44% at 72% 60%, rgba(201, 168, 76, 0.16) 0%, transparent 60%),
+    radial-gradient(50% 50% at 55% 80%, rgba(20, 52, 34, 0.55) 0%, transparent 65%);
+  filter: blur(36px);
+  animation: auroraShift 26s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ─── Gold sweep on hover (cards / images) ───────────────────── */
+.gold-sweep { position: relative; overflow: hidden; }
+.gold-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -120%;
+  width: 70%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 230, 150, 0.18) 45%, rgba(255, 230, 150, 0.28) 50%, transparent);
+  transform: skewX(-18deg);
+  transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.gold-sweep:hover::after { left: 130%; }
+
+/* ─── Animated gold underline (nav links) ────────────────────── */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 100%; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ─── Word / letter rise reveal ──────────────────────────────── */
+@keyframes wordRise {
+  from { opacity: 0; transform: translateY(0.5em) rotate(2deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0); }
+}
+.word-reveal > span {
+  display: inline-block;
+  opacity: 0;
+}
+.word-reveal.in-view > span {
+  animation: wordRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Soft float (ornaments / monogram) ──────────────────────── */
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.soft-float { animation: softFloat 6s ease-in-out infinite; }
+
+/* ─── Card lift on hover ─────────────────────────────────────── */
+.lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+}
+.lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+/* ─── SVG stroke draw (intro monogram) ───────────────────────── */
+@keyframes drawStroke {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ─── Shimmer sweep across a masked element (intro names) ─────── */
+@keyframes shimmerSweep {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ─── Slow gold ring rotation ────────────────────────────────── */
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spinSlow 40s linear infinite; }
+
+/* ─── Marquee (ivory band) ───────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+
+/* ─── Reduced motion: respect user preference ────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora, .marquee-track, .spin-slow, .soft-float { animation: none !important; }
 }

@@ -9,6 +9,7 @@ type RSVPRequest = {
   guests?: string | null
   meal?: string | null
   dietary?: string
+  songRequest?: string
   message?: string
 }
 
@@ -27,6 +28,7 @@ export async function POST(request: Request) {
     const guests = body.guests?.trim() ?? ""
     const meal = body.meal?.trim() ?? ""
     const dietary = body.dietary?.trim() ?? ""
+    const songRequest = body.songRequest?.trim() ?? ""
     const message = body.message?.trim() ?? ""
 
     if (!firstName || !lastName || !email || !attendance) {
@@ -85,7 +87,8 @@ export async function POST(request: Request) {
       attendance === "yes" ? `Guests: ${guests}` : null,
       attendance === "yes" ? `Meal: ${meal}` : null,
       attendance === "yes" ? `Dietary: ${dietary || "None"}` : null,
-      `Message: ${message || "None"}`,
+      songRequest ? `Song Request: ${songRequest}` : null,
+      `Message: ${message || "None"}`,  
     ].filter(Boolean)
 
     await transporter.sendMail({

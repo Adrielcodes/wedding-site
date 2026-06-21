@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Lato } from 'next/font/google'
+import { Cormorant_Garamond, Jost } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const playfair = Playfair_Display({ 
+const cormorant = Cormorant_Garamond({ 
   subsets: ["latin"],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   variable: '--font-serif',
   display: 'swap'
 });
 
-const lato = Lato({ 
+const jost = Jost({ 
   subsets: ["latin"],
-  weight: ['300', '400', '700'],
+  weight: ['200', '300', '400', '500', '600'],
   variable: '--font-sans',
   display: 'swap'
 });
@@ -33,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${lato.variable} font-sans antialiased`}>
+      <body className={`${cormorant.variable} ${jost.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

@@ -1,102 +1,223 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { X } from "lucide-react"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { SectionOrnament, CornerAccents } from "./section-ornament"
 
 const photos = [
   {
-    src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=2070&auto=format&fit=crop",
-    alt: "Zami and Adriel engagement photo - couple walking in a field",
-    span: "col-span-2 row-span-2"
+    src: "/handhold2.jpg",
+    alt: "Zami and Adriel holding hands",
+    col: "col-span-2",
+    row: "row-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?q=80&w=2069&auto=format&fit=crop",
-    alt: "Romantic sunset photo",
-    span: "col-span-1 row-span-1"
+    src: "/BZ7A8181.jpg",
+    alt: "Captured moment",
+    col: "col-span-1",
+    row: "row-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?q=80&w=2070&auto=format&fit=crop",
-    alt: "Couple holding hands",
-    span: "col-span-1 row-span-1"
+    src: "/BZ7A8183.jpg",
+    alt: "Captured moment",
+    col: "col-span-1",
+    row: "row-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
-    alt: "Wedding rings and flowers",
-    span: "col-span-1 row-span-2"
+    src: "/BZ7A8202.jpg",
+    alt: "Captured moment",
+    col: "col-span-1",
+    row: "row-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=2071&auto=format&fit=crop",
-    alt: "Couple laughing together",
-    span: "col-span-1 row-span-1"
+    src: "/IMG_2965.jpg",
+    alt: "Captured moment",
+    col: "col-span-1",
+    row: "row-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=2787&auto=format&fit=crop",
-    alt: "Beach engagement photo",
-    span: "col-span-2 row-span-1"
-  }
+    src: "/walking.jpg",
+    alt: "Zami and Adriel walking together",
+    col: "col-span-2",
+    row: "row-span-1",
+  },
+  {
+    src: "/C93679DD-D674-46D5-91D9-8DD5FF930594.png",
+    alt: "Captured moment",
+    col: "col-span-1",
+    row: "row-span-1",
+  },
 ]
 
+function RevealBlock({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.remove("from-above")
+          el.classList.add("in-view")
+        } else {
+          el.classList.remove("in-view")
+          if (entry.boundingClientRect.top < 0) el.classList.add("from-above")
+          else el.classList.remove("from-above")
+        }
+      },
+      { threshold: 0.08 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className={`scroll-reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  )
+}
+
 export function PhotoGallery() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+
+  const prev = () => setLightboxIndex((i) => (i === null ? null : (i - 1 + photos.length) % photos.length))
+  const next = () => setLightboxIndex((i) => (i === null ? null : (i + 1) % photos.length))
+
+  useEffect(() => {
+    if (lightboxIndex === null) return
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxIndex(null)
+      if (e.key === "ArrowLeft") prev()
+      if (e.key === "ArrowRight") next()
+    }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightboxIndex])
 
   return (
-    <section id="gallery" className="py-24 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <p className="text-accent font-sans tracking-[0.2em] uppercase text-sm mb-4">
-            Captured Moments
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground">
+    <section id="gallery" className="relative py-28 md:py-36 bg-secondary overflow-hidden">
+      {/* Corner accents */}
+      <CornerAccents size={64} />
+
+      <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
+
+        {/* Top ornament */}
+        <RevealBlock className="mb-14">
+          <SectionOrnament />
+        </RevealBlock>
+
+        {/* Header */}
+        <RevealBlock className="text-center mb-20">
+          <p className="luxury-label mb-4">Captured Moments</p>
+          <h2 className="font-serif text-foreground leading-none" style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}>
             Our Gallery
           </h2>
-        </div>
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <span className="gold-divider" />
+          </div>
+        </RevealBlock>
 
-        {/* Photo Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] md:auto-rows-[250px] gap-4 max-w-6xl mx-auto">
+        {/* Editorial masonry grid */}
+        <div
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+          style={{ gridAutoRows: "200px", gridAutoFlow: "dense" } as React.CSSProperties}
+        >
           {photos.map((photo, index) => (
-            <button
+            <RevealBlock
               key={index}
-              onClick={() => setSelectedImage(photo.src)}
-              className={`${photo.span} relative overflow-hidden rounded-lg group cursor-pointer`}
+              delay={index * 80}
+              className={`${photo.col} ${photo.row} relative overflow-hidden group cursor-pointer gold-sweep`}
             >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
-            </button>
+              <button
+                onClick={() => setLightboxIndex(index)}
+                className="absolute inset-0 w-full h-full"
+                aria-label={`View: ${photo.alt}`}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: "rgba(201,168,76,0.15)" }}
+                />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ boxShadow: "inset 0 0 0 2px rgba(201,168,76,0.5)" }}
+                />
+              </button>
+            </RevealBlock>
           ))}
         </div>
 
-        {/* Lightbox */}
-        {selectedImage && (
-          <div 
-            className="fixed inset-0 z-50 bg-foreground/90 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-6 right-6 text-background hover:text-primary transition-colors"
-              aria-label="Close lightbox"
-            >
-              <X className="w-8 h-8" />
-            </button>
-            <div className="relative w-full max-w-4xl max-h-[90vh] aspect-[4/3]">
-              <Image
-                src={selectedImage}
-                alt="Selected photo"
-                fill
-                className="object-contain"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-              />
-            </div>
-          </div>
-        )}
+        {/* Bottom ornament */}
+        <RevealBlock className="mt-16">
+          <SectionOrnament flip />
+        </RevealBlock>
       </div>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.95)" }}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors p-2"
+            onClick={() => setLightboxIndex(null)}
+            aria-label="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <button
+            className="absolute left-4 md:left-8 text-white/50 hover:text-white transition-colors p-2"
+            onClick={(e) => { e.stopPropagation(); prev() }}
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-7 h-7" />
+          </button>
+          <div
+            className="relative"
+            style={{ width: "min(90vw, 1100px)", height: "min(80vh, 700px)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={photos[lightboxIndex].src}
+              alt={photos[lightboxIndex].alt}
+              fill
+              className="object-contain"
+              sizes="90vw"
+            />
+            <div
+              className="absolute top-0 left-0 w-8 h-8 pointer-events-none"
+              style={{ borderTop: "1px solid var(--accent)", borderLeft: "1px solid var(--accent)" }}
+            />
+            <div
+              className="absolute bottom-0 right-0 w-8 h-8 pointer-events-none"
+              style={{ borderBottom: "1px solid var(--accent)", borderRight: "1px solid var(--accent)" }}
+            />
+          </div>
+          <button
+            className="absolute right-4 md:right-8 text-white/50 hover:text-white transition-colors p-2"
+            onClick={(e) => { e.stopPropagation(); next() }}
+            aria-label="Next"
+          >
+            <ChevronRight className="w-7 h-7" />
+          </button>
+          <p
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 font-sans text-white/40"
+            style={{ fontSize: "0.7rem", letterSpacing: "0.3em" }}
+          >
+            {lightboxIndex + 1} / {photos.length}
+          </p>
+        </div>
+      )}
     </section>
   )
 }
