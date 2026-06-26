@@ -92,23 +92,6 @@ export function IntroAnimation() {
         }}
       />
 
-      {/* ── Glowing gold seam (visible as panels part) ── */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          bottom: 0,
-          left: "50%",
-          width: 1,
-          transform: "translateX(-50%)",
-          background:
-            "linear-gradient(to bottom, transparent, rgba(201,168,76,0.9), transparent)",
-          opacity: phase === "out" ? 1 : 0,
-          boxShadow: "0 0 22px 3px rgba(201,168,76,0.5)",
-          transition: "opacity 0.4s ease",
-          zIndex: 3,
-        }}
-      />
 
       {/* ── Grain ── */}
       <div

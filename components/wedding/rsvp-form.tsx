@@ -6,16 +6,16 @@ import { SectionOrnament, CornerAccents } from "./section-ornament"
 // ── Birds — large, aimed at screen corners ─────────────────
 const BIRDS = [
   // upper-right corner
-  { dx:  950, dy: -520, delay:   0, dur: 2600, size: 48, wb: 150 },
-  { dx:  800, dy: -460, delay: 100, dur: 2400, size: 38, wb: 165 },
-  { dx:  680, dy: -580, delay: 210, dur: 2700, size: 28, wb: 185 },
+  { dx:  950, dy: -520, delay:   0, dur: 5000, size: 48, wb: 200 },
+  { dx:  800, dy: -460, delay: 150, dur: 4700, size: 38, wb: 225 },
+  { dx:  680, dy: -580, delay: 310, dur: 5300, size: 28, wb: 260 },
   // upper-left corner
-  { dx: -910, dy: -500, delay:  65, dur: 2500, size: 44, wb: 158 },
-  { dx: -760, dy: -440, delay: 155, dur: 2300, size: 34, wb: 172 },
-  { dx: -640, dy: -560, delay: 260, dur: 2650, size: 26, wb: 192 },
+  { dx: -910, dy: -500, delay:  90, dur: 4900, size: 44, wb: 210 },
+  { dx: -760, dy: -440, delay: 230, dur: 4500, size: 34, wb: 240 },
+  { dx: -640, dy: -560, delay: 390, dur: 5100, size: 26, wb: 280 },
   // wide-angle stragglers
-  { dx:  1050, dy: -280, delay:  90, dur: 2200, size: 40, wb: 160 },
-  { dx: -1000, dy: -260, delay: 140, dur: 2350, size: 32, wb: 178 },
+  { dx:  1050, dy: -280, delay: 130, dur: 4300, size: 40, wb: 220 },
+  { dx: -1000, dy: -260, delay: 210, dur: 4600, size: 32, wb: 250 },
 ]
 
 // pre-build per-bird keyframe CSS (avoids CSS-var-in-keyframe issues)
@@ -72,13 +72,15 @@ function makeBurst(left: string, top: string, delay: number, dur: number, r: num
 
 const FIREWORKS: FWBurst[] = [
   // left side — staggered so each pop is distinct
-  makeBurst("12%", "35%",    0, 1900, 100),
-  makeBurst("17%", "53%",  380, 1800,  85),
-  makeBurst(" 8%", "67%",  760, 1850,  90),
-  // right side — offset so left fires first, then right echoes
-  makeBurst("88%", "35%",  190, 1900, 100),
-  makeBurst("83%", "53%",  570, 1800,  85),
-  makeBurst("92%", "67%",  950, 1850,  90),
+  makeBurst("11%", "30%",    0, 3200, 105),
+  makeBurst("16%", "50%",  500, 3000,  90),
+  makeBurst(" 8%", "65%", 1000, 3100,  95),
+  makeBurst("14%", "20%", 1500, 2900,  80),
+  // right side — offset so left fires first, right echoes
+  makeBurst("89%", "30%",  260, 3200, 105),
+  makeBurst("84%", "50%",  760, 3000,  90),
+  makeBurst("92%", "65%", 1260, 3100,  95),
+  makeBurst("86%", "20%", 1760, 2900,  80),
 ]
 
 // pre-build per-particle keyframe CSS
@@ -212,8 +214,8 @@ export function RSVPForm() {
       }
       setSubmitted(true)
       setBirdsPhase("on")
-      setTimeout(() => setBirdsPhase("fading"), 4200) // start fade-out
-      setTimeout(() => setBirdsPhase("off"),    5400) // remove from DOM
+      setTimeout(() => setBirdsPhase("fading"), 7500)  // start fade-out
+      setTimeout(() => setBirdsPhase("off"),    9000)  // remove from DOM
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Could not submit RSVP right now.")
     } finally {
@@ -301,9 +303,10 @@ export function RSVPForm() {
           backface-visibility: hidden;
         }
         .env-flap.open { transform: perspective(1200px) rotateX(-175deg); }
-        .env-body { max-height: 0; overflow: hidden; transition: max-height 1.1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .env-body { max-height: 0; overflow: hidden; transition: max-height 1.1s cubic-bezier(0.4, 0, 0.2, 1); overflow-anchor: none; }
         .env-body.open { max-height: 3000px; }
         .env-card:hover .env-hint { opacity: 1 !important; }
+        #rsvp { overflow-anchor: none; }
       `}</style>
 
       {/* Section header */}
@@ -448,7 +451,7 @@ export function RSVPForm() {
                   </div>
 
                   {submitted ? (
-                    <div style={{ textAlign: "center", padding: "3rem 0" }}>
+                    <div style={{ textAlign: "center", padding: "3rem 0", minHeight: "520px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                       <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center",
                         width: 52, height: 52, border: "1px solid var(--accent)", marginBottom: "1.5rem" }}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
