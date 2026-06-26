@@ -23,8 +23,8 @@ const BIRD_CSS = BIRDS.map((b, i) => `
   @keyframes bf${i} {
     0%   { transform: translate(0px,0px) scale(1); opacity: 0; }
     6%   { opacity: 1; }
-    82%  { opacity: 0.9; }
-    100% { transform: translate(${b.dx}px,${b.dy}px) scale(0.08); opacity: 0; }
+    80%  { opacity: 0.9; }
+    100% { transform: translate(${b.dx}px,${b.dy}px) scale(0); opacity: 0; }
   }
 `).join("")
 
@@ -71,22 +71,24 @@ function makeBurst(left: string, top: string, delay: number, dur: number, r: num
 }
 
 const FIREWORKS: FWBurst[] = [
-  // left side
-  makeBurst("12%", "35%",   0, 1100, 100),
-  makeBurst("17%", "52%", 280, 1050,  85),
-  makeBurst(" 8%", "66%", 560, 1000,  90),
-  // right side
-  makeBurst("88%", "35%", 140, 1100, 100),
-  makeBurst("83%", "52%", 420, 1050,  85),
-  makeBurst("92%", "66%", 700, 1000,  90),
+  // left side — staggered so each pop is distinct
+  makeBurst("12%", "35%",    0, 1900, 100),
+  makeBurst("17%", "53%",  380, 1800,  85),
+  makeBurst(" 8%", "67%",  760, 1850,  90),
+  // right side — offset so left fires first, then right echoes
+  makeBurst("88%", "35%",  190, 1900, 100),
+  makeBurst("83%", "53%",  570, 1800,  85),
+  makeBurst("92%", "67%",  950, 1850,  90),
 ]
 
 // pre-build per-particle keyframe CSS
+// 0% starts at opacity:0 so particles are invisible during their delay (no flash)
 const FW_CSS = FIREWORKS.flatMap((fw, fi) =>
   fw.particles.map((p, pi) => `
     @keyframes fw_${fi}_${pi} {
-      0%   { transform: translate(0px,0px) scale(1); opacity: 1; }
-      70%  { opacity: 0.75; }
+      0%   { transform: translate(0px,0px) scale(0.1); opacity: 0; }
+      8%   { opacity: 1; }
+      65%  { opacity: 0.8; }
       100% { transform: translate(${p.dx.toFixed(1)}px,${p.dy.toFixed(1)}px) scale(0); opacity: 0; }
     }
   `)
@@ -175,7 +177,7 @@ function WaxSeal({ size = 72 }: { size?: number }) {
 export function RSVPForm() {
   const [opened,       setOpened]       = useState(false)
   const [submitted,    setSubmitted]    = useState(false)
-  const [showBirds,    setShowBirds]    = useState(false)
+  const [birdsPhase,   setBirdsPhase]   = useState<"off"|"on"|"fading">("off")
   const [attendance,   setAttendance]   = useState<string>("")
   const [guests,       setGuests]       = useState<string>("")
   const [meal,         setMeal]         = useState<string>("")
@@ -209,8 +211,9 @@ export function RSVPForm() {
         throw new Error(body?.error || "Could not submit RSVP right now. Please try again.")
       }
       setSubmitted(true)
-      setShowBirds(true)
-      setTimeout(() => setShowBirds(false), 4500)
+      setBirdsPhase("on")
+      setTimeout(() => setBirdsPhase("fading"), 4200) // start fade-out
+      setTimeout(() => setBirdsPhase("off"),    5400) // remove from DOM
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Could not submit RSVP right now.")
     } finally {
@@ -221,8 +224,17 @@ export function RSVPForm() {
   return (
     <>
     {/* ── Bird flock overlay ── */}
-    {showBirds && (
-      <>
+    {birdsPhase !== "off" && (
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 9999,
+          opacity: birdsPhase === "fading" ? 0 : 1,
+          transition: birdsPhase === "fading" ? "opacity 1.2s ease" : "none",
+        }}
+      >
         <style>{`
           @keyframes wingBeat {
             0%, 100% { transform: scaleY(1); }
@@ -233,7 +245,7 @@ export function RSVPForm() {
         `}</style>
 
         {/* Birds — burst from screen centre */}
-        <div style={{ position: "fixed", top: "50%", left: "50%", pointerEvents: "none", zIndex: 9999 }}>
+        <div style={{ position: "absolute", top: "50%", left: "50%" }}>
           {BIRDS.map((b, i) => (
             <div
               key={i}
@@ -251,17 +263,11 @@ export function RSVPForm() {
           ))}
         </div>
 
-        {/* Fireworks — fixed viewport positions left & right */}
+        {/* Fireworks — left & right of letter */}
         {FIREWORKS.map((fw, fi) => (
           <div
             key={fi}
-            style={{
-              position: "fixed",
-              left: fw.left,
-              top: fw.top,
-              pointerEvents: "none",
-              zIndex: 9999,
-            }}
+            style={{ position: "absolute", left: fw.left, top: fw.top }}
           >
             {fw.particles.map((p, pi) => (
               <div
@@ -280,7 +286,7 @@ export function RSVPForm() {
             ))}
           </div>
         ))}
-      </>
+      </div>
     )}
 
     <section id="rsvp" style={{ background: "var(--secondary)", padding: "8rem 0", position: "relative", overflow: "hidden" }}>
