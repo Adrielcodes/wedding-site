@@ -3,6 +3,36 @@
 import { useState } from "react"
 import { SectionOrnament, CornerAccents } from "./section-ornament"
 
+function playWhoosh() {
+  try {
+    const ctx = new AudioContext()
+    const duration = 0.55
+    const bufferSize = Math.ceil(ctx.sampleRate * duration)
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
+    const data = buffer.getChannelData(0)
+    for (let i = 0; i < bufferSize; i++) {
+      const t = i / bufferSize
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 1.8) * Math.pow(t + 0.01, 0.3)
+    }
+    const source = ctx.createBufferSource()
+    source.buffer = buffer
+    const filter = ctx.createBiquadFilter()
+    filter.type = "bandpass"
+    filter.frequency.setValueAtTime(3500, ctx.currentTime)
+    filter.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + duration)
+    filter.Q.value = 0.8
+    const gain = ctx.createGain()
+    gain.gain.setValueAtTime(0.9, ctx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration)
+    source.connect(filter)
+    filter.connect(gain)
+    gain.connect(ctx.destination)
+    source.start()
+  } catch {
+    // AudioContext not available (e.g. server-side)
+  }
+}
+
 // ── Field sub-components (cream theme) ────────────────────
 function Field({
   id, name, type = "text", placeholder, required, label,
@@ -171,7 +201,7 @@ export function RSVPForm() {
         <div
           className="env-card"
           style={{ perspective: "1200px", cursor: opened ? "default" : "pointer" }}
-          onClick={() => { if (!opened) setOpened(true) }}
+          onClick={() => { if (!opened) { setOpened(true); playWhoosh() } }}
           role={opened ? undefined : "button"}
           aria-label={opened ? undefined : "Open envelope to RSVP"}
         >
@@ -253,7 +283,7 @@ export function RSVPForm() {
                   </div>
                   <p style={{ fontFamily: "var(--font-serif)", fontSize: "1.5rem", fontWeight: 600,
                     color: "rgba(40,28,10,0.75)", letterSpacing: "0.02em", marginLeft: "3.5rem" }}>
-                    Zami &amp; Adriel
+                    Zamirah &amp; Adriel
                   </p>
                   <p style={{ fontFamily: "var(--font-serif)", fontSize: "0.85rem", fontStyle: "italic",
                     color: "rgba(80,55,30,0.45)", marginLeft: "3.5rem", marginTop: "0.3rem" }}>
@@ -304,7 +334,7 @@ export function RSVPForm() {
                   ) : (
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-                        <Field id="firstName" name="firstName" placeholder="Zami"  label="First Name" required />
+                        <Field id="firstName" name="firstName" placeholder="Zamirah"  label="First Name" required />
                         <Field id="lastName"  name="lastName"  placeholder="Smith" label="Last Name"  required />
                       </div>
 

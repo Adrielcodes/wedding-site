@@ -20,7 +20,7 @@ export function CountdownTimer() {
 
   useEffect(() => {
     setMounted(true)
-    const weddingDate = new Date('2027-07-01T16:00:00')
+    const weddingDate = new Date('2027-05-01T16:00:00')
 
     const calculateTimeLeft = () => {
       const now = new Date()

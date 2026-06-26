@@ -37,10 +37,10 @@ export function Footer() {
             Z·A
           </div>
           <h2 className="font-serif text-white text-3xl md:text-4xl mb-2">
-            Zami &amp; Adriel
+            Zamirah &amp; Adriel
           </h2>
           <p className="font-sans text-white/40" style={{ fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase" }}>
-            July 2027 &nbsp;·&nbsp; Napa Valley, California
+            May 1, 2027 &nbsp;·&nbsp; Miami, Florida
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export function Footer() {
           style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
           <p className="font-sans text-white/20" style={{ fontSize: "0.72rem", letterSpacing: "0.1em" }}>
-            &copy; 2027 Zami &amp; Adriel. Made with love.
+            &copy; 2027 Zamirah &amp; Adriel. Made with love.
           </p>
         </div>
       </div>

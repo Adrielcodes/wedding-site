@@ -122,7 +122,7 @@ export function OurStory() {
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
                 src="/handhold.png"
-                alt="Zami and Adriel"
+                alt="Zamirah and Adriel"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -141,7 +141,7 @@ export function OurStory() {
 
           {/* Intro text */}
           <RevealBlock delay={200}>
-            <p className="luxury-label mb-6">Zami &amp; Adriel</p>
+            <p className="luxury-label mb-6">Zamirah &amp; Adriel</p>
             <h3 className="font-serif text-3xl md:text-4xl text-foreground leading-snug mb-6">
               A love story written<br />
               <em>in laughter and adventure.</em>
@@ -150,11 +150,11 @@ export function OurStory() {
               What started as a chaotic Christmas game turned into a rooftop cinema date, spontaneous sushi nights, and a beachside proposal in Puerto Rico — proof that the best love stories begin unexpectedly.
             </p>
             <p className="font-sans text-muted-foreground leading-relaxed" style={{ fontSize: "0.95rem" }}>
-              On July 2027, in Napa Valley, we invite you to witness the next chapter of our forever.
+              On May 1, 2027, in Miami, FL, we invite you to witness the next chapter of our forever.
             </p>
             <div className="flex items-center gap-4 mt-8">
               <span className="gold-divider" />
-              <span className="font-serif italic text-muted-foreground text-lg">Zami &amp; Adriel</span>
+              <span className="font-serif italic text-muted-foreground text-lg">Zamirah &amp; Adriel</span>
             </div>
           </RevealBlock>
         </div>

@@ -19,8 +19,8 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: 'Zami & Adriel | Our Wedding',
-  description: 'Join us in celebrating our love. Zami & Adriel are getting married in July 2027.',
+  title: 'Zamirah & Adriel | Our Wedding',
+  description: 'Join us in celebrating our love. Zamirah & Adriel are getting married on May 1, 2027.',
   generator: 'v0.app',
   icons: {
     icon: '/icon.svg',

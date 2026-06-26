@@ -4,8 +4,8 @@
  * palette forward and breaks up the dark sections.
  */
 export function MarqueeBand() {
-  const phrase = "Zami & Adriel"
-  const sub = "July 2027 · Napa Valley"
+  const phrase = "Zamirah & Adriel"
+  const sub = "May 1, 2027 · Miami, FL"
 
   const Item = () => (
     <span

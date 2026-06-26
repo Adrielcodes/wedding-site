@@ -9,6 +9,7 @@ import { Footer } from "@/components/wedding/footer"
 import { IntroAnimation } from "@/components/wedding/intro-animation"
 import { SiteChrome } from "@/components/wedding/site-chrome"
 import { MarqueeBand } from "@/components/wedding/marquee-band"
+import { CountdownTimer } from "@/components/wedding/countdown-timer"
 
 export default function WeddingPage() {
   return (
@@ -17,6 +18,7 @@ export default function WeddingPage() {
       <SiteChrome />
       <Navigation />
       <HeroSection />
+      <CountdownTimer />
       <OurStory />
       <MarqueeBand />
       <PhotoGallery />

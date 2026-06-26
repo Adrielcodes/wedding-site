@@ -96,10 +96,10 @@ export function EventDetails() {
               <MapPin className="w-3.5 h-3.5 mt-1 flex-shrink-0" style={{ color: "var(--accent)" }} />
               <div>
                 <p className="font-sans text-white/80 mb-0.5" style={{ fontSize: "0.9rem" }}>
-                  The Grand Estate — Napa Valley
+                  Cinco Farm Gardens — Miami, FL
                 </p>
                 <p className="font-sans text-white/40 pl-0" style={{ fontSize: "0.78rem" }}>
-                  1234 Vineyard Lane, Napa Valley, CA 94558
+                  18850 SW 232nd St, Miami, FL 33170
                 </p>
               </div>
             </div>
@@ -117,7 +117,7 @@ export function EventDetails() {
                   </span>
                 </div>
                 <p className="font-sans text-white/55 leading-relaxed pl-6" style={{ fontSize: "0.88rem" }}>
-                  Exchange of vows in the candlelit garden setting, surrounded by rolling vineyards and old-growth trees.
+                  Exchange of vows in an intimate garden setting, surrounded by lush tropical landscapes at Cinco Farm Gardens.
                 </p>
               </div>
               <div>
@@ -128,7 +128,7 @@ export function EventDetails() {
                   </span>
                 </div>
                 <p className="font-sans text-white/55 leading-relaxed pl-6" style={{ fontSize: "0.88rem" }}>
-                  An evening of fine dining, dancing, and celebration in the stunning barrel-vaulted ballroom.
+                  An evening of fine dining, dancing, and celebration under the stars at the beautiful Cinco Farm Gardens estate.
                 </p>
               </div>
             </div>

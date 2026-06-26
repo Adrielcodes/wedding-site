@@ -262,7 +262,7 @@ export function IntroAnimation() {
               "introNames 1s cubic-bezier(0.16,1,0.3,1) 1.5s forwards, shimmerSweep 3s linear 1.6s infinite",
           }}
         >
-          Zami &amp; Adriel
+          Zamirah &amp; Adriel
         </h1>
 
         {/* Date */}
@@ -277,7 +277,7 @@ export function IntroAnimation() {
             animation: "introDate 1.4s cubic-bezier(0.16,1,0.3,1) 1.8s forwards",
           }}
         >
-          July 2027 · Napa Valley
+          May 1, 2027 · Miami, FL
         </p>
 
         {/* Growing line */}

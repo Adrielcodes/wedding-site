@@ -50,17 +50,17 @@ const travelTips = [
   {
     icon: Plane,
     title: "By Air",
-    description: "The nearest airport is San Francisco International (SFO), approximately 60 miles south. Oakland International (OAK) is also convenient.",
+    description: "The nearest airports are Miami International (MIA) and Fort Lauderdale-Hollywood International (FLL), both approximately 30–40 miles from the venue.",
   },
   {
     icon: Car,
     title: "By Car",
-    description: "Take Highway 29 north into Napa Valley. Complimentary valet parking will be provided at the venue from 3:00 PM.",
+    description: "Located at 18850 SW 232nd St, Homestead. Take FL-821 S to SW 232nd St. Complimentary parking will be provided at the venue.",
   },
   {
     icon: Hotel,
     title: "Accommodation",
-    description: "We have reserved a room block at The Carneros Inn. Use code ZAMIADRIEL2027 when booking for a discounted rate.",
+    description: "Several hotels are available nearby in the Homestead and South Miami area. We recommend booking early as May is a popular travel season in South Florida.",
   },
 ]
 
@@ -95,16 +95,16 @@ export function Location() {
           <RevealBlock delay={100}>
             <div className="mb-8">
               <h3 className="font-serif text-foreground text-3xl md:text-4xl mb-3">
-                The Grand Estate
+                Cinco Farm Gardens
               </h3>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
                 <div>
                   <p className="font-sans text-foreground" style={{ fontSize: "0.9rem" }}>
-                    1234 Vineyard Lane
+                    18850 SW 232nd St
                   </p>
                   <p className="font-sans text-muted-foreground" style={{ fontSize: "0.9rem" }}>
-                    Napa Valley, CA 94558
+                    Miami, FL 33170
                   </p>
                 </div>
               </div>
@@ -116,8 +116,8 @@ export function Location() {
             />
 
             <p className="font-sans text-muted-foreground leading-relaxed mb-2" style={{ fontSize: "0.92rem" }}>
-              Nestled among 200 acres of pristine Napa Valley countryside, The Grand Estate is a stunning blend of
-              French château architecture and natural California landscape — the perfect backdrop for our celebration.
+              Cinco Farm Gardens is a stunning tropical venue nestled in South Miami, offering lush garden settings
+              and open-air spaces — the perfect backdrop for our outdoor celebration.
             </p>
           </RevealBlock>
 
@@ -134,7 +134,7 @@ export function Location() {
                 style={{ borderBottom: "2px solid var(--accent)", borderRight: "2px solid var(--accent)" }}
               />
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.8499477821044!2d-122.32851618465846!3d38.29842067966692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085067af5dc7e71%3A0x4d29c25e01d8e!2sNapa%20Valley%2C%20CA!5e0!3m2!1sen!2sus!4v1647889234567!5m2!1sen!2sus"
+                src="https://maps.google.com/maps?q=18850+SW+232nd+St,+Miami,+FL+33170&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="380"
                 style={{ border: 0, display: "block", filter: "grayscale(40%) contrast(1.1)" }}

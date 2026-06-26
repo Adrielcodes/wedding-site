@@ -130,7 +130,7 @@ export function HeroSection() {
             className="hero-name hero-name-1 block tracking-tight"
             style={{ fontSize: "clamp(5rem, 14vw, 11rem)", fontWeight: 300 }}
           >
-            Zami
+            Zamirah
           </span>
           <span
             className="hero-name hero-name-2 gold-shimmer block italic font-light"
@@ -156,7 +156,7 @@ export function HeroSection() {
             className="font-sans text-white/40 tracking-[0.55em] uppercase"
             style={{ fontSize: "0.6rem" }}
           >
-            July 2027 &nbsp;·&nbsp; Napa Valley
+            May 1, 2027 &nbsp;·&nbsp; Miami, FL
           </p>
           <span className="hidden sm:inline-block" style={{ width: 40, height: 1, background: "rgba(201,168,76,0.4)" }} />
         </div>
