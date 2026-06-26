@@ -3,35 +3,95 @@
 import { useState } from "react"
 import { SectionOrnament, CornerAccents } from "./section-ornament"
 
-function playWhoosh() {
-  try {
-    const ctx = new AudioContext()
-    const duration = 0.55
-    const bufferSize = Math.ceil(ctx.sampleRate * duration)
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
-    const data = buffer.getChannelData(0)
-    for (let i = 0; i < bufferSize; i++) {
-      const t = i / bufferSize
-      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 1.8) * Math.pow(t + 0.01, 0.3)
-    }
-    const source = ctx.createBufferSource()
-    source.buffer = buffer
-    const filter = ctx.createBiquadFilter()
-    filter.type = "bandpass"
-    filter.frequency.setValueAtTime(3500, ctx.currentTime)
-    filter.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + duration)
-    filter.Q.value = 0.8
-    const gain = ctx.createGain()
-    gain.gain.setValueAtTime(0.9, ctx.currentTime)
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration)
-    source.connect(filter)
-    filter.connect(gain)
-    gain.connect(ctx.destination)
-    source.start()
-  } catch {
-    // AudioContext not available (e.g. server-side)
+// ── Birds — large, aimed at screen corners ─────────────────
+const BIRDS = [
+  // upper-right corner
+  { dx:  950, dy: -520, delay:   0, dur: 2600, size: 48, wb: 150 },
+  { dx:  800, dy: -460, delay: 100, dur: 2400, size: 38, wb: 165 },
+  { dx:  680, dy: -580, delay: 210, dur: 2700, size: 28, wb: 185 },
+  // upper-left corner
+  { dx: -910, dy: -500, delay:  65, dur: 2500, size: 44, wb: 158 },
+  { dx: -760, dy: -440, delay: 155, dur: 2300, size: 34, wb: 172 },
+  { dx: -640, dy: -560, delay: 260, dur: 2650, size: 26, wb: 192 },
+  // wide-angle stragglers
+  { dx:  1050, dy: -280, delay:  90, dur: 2200, size: 40, wb: 160 },
+  { dx: -1000, dy: -260, delay: 140, dur: 2350, size: 32, wb: 178 },
+]
+
+// pre-build per-bird keyframe CSS (avoids CSS-var-in-keyframe issues)
+const BIRD_CSS = BIRDS.map((b, i) => `
+  @keyframes bf${i} {
+    0%   { transform: translate(0px,0px) scale(1); opacity: 0; }
+    6%   { opacity: 1; }
+    82%  { opacity: 0.9; }
+    100% { transform: translate(${b.dx}px,${b.dy}px) scale(0.08); opacity: 0; }
+  }
+`).join("")
+
+function BirdSVG({ size }: { size: number }) {
+  return (
+    <svg
+      width={size * 2.4}
+      height={size * 1.2}
+      viewBox="-15 -13 30 14"
+      style={{ overflow: "visible", display: "block" }}
+      aria-hidden="true"
+    >
+      <path d="M0,0 Q-5,-12,-14,-4" stroke="white" strokeWidth="2.6" strokeLinecap="round" fill="none" />
+      <path d="M0,0 Q5,-12,14,-4"  stroke="white" strokeWidth="2.6" strokeLinecap="round" fill="none" />
+      <circle cx="0" cy="0" r="2" fill="white" />
+    </svg>
+  )
+}
+
+// ── Fireworks — burst on left & right of the letter ────────
+const FW_COLORS = ["#c9a84c", "#ffffff", "#f5ede0", "#e8d5a8"]
+const FW_N = 14  // particles per burst
+
+interface FWBurst {
+  left: string; top: string; delay: number; dur: number
+  particles: { dx: number; dy: number; size: number; color: string }[]
+}
+
+function makeBurst(left: string, top: string, delay: number, dur: number, r: number): FWBurst {
+  return {
+    left, top, delay, dur,
+    particles: Array.from({ length: FW_N }, (_, i) => {
+      const angle = (360 / FW_N) * i
+      const dist  = r * (0.6 + (i % 3) * 0.2)
+      const rad   = (angle * Math.PI) / 180
+      return {
+        dx:    Math.cos(rad) * dist,
+        dy:    Math.sin(rad) * dist,
+        size:  i % 3 === 0 ? 7 : i % 3 === 1 ? 5 : 4,
+        color: FW_COLORS[i % FW_COLORS.length],
+      }
+    }),
   }
 }
+
+const FIREWORKS: FWBurst[] = [
+  // left side
+  makeBurst("12%", "35%",   0, 1100, 100),
+  makeBurst("17%", "52%", 280, 1050,  85),
+  makeBurst(" 8%", "66%", 560, 1000,  90),
+  // right side
+  makeBurst("88%", "35%", 140, 1100, 100),
+  makeBurst("83%", "52%", 420, 1050,  85),
+  makeBurst("92%", "66%", 700, 1000,  90),
+]
+
+// pre-build per-particle keyframe CSS
+const FW_CSS = FIREWORKS.flatMap((fw, fi) =>
+  fw.particles.map((p, pi) => `
+    @keyframes fw_${fi}_${pi} {
+      0%   { transform: translate(0px,0px) scale(1); opacity: 1; }
+      70%  { opacity: 0.75; }
+      100% { transform: translate(${p.dx.toFixed(1)}px,${p.dy.toFixed(1)}px) scale(0); opacity: 0; }
+    }
+  `)
+).join("")
+
 
 // ── Field sub-components (cream theme) ────────────────────
 function Field({
@@ -115,6 +175,7 @@ function WaxSeal({ size = 72 }: { size?: number }) {
 export function RSVPForm() {
   const [opened,       setOpened]       = useState(false)
   const [submitted,    setSubmitted]    = useState(false)
+  const [showBirds,    setShowBirds]    = useState(false)
   const [attendance,   setAttendance]   = useState<string>("")
   const [guests,       setGuests]       = useState<string>("")
   const [meal,         setMeal]         = useState<string>("")
@@ -148,6 +209,8 @@ export function RSVPForm() {
         throw new Error(body?.error || "Could not submit RSVP right now. Please try again.")
       }
       setSubmitted(true)
+      setShowBirds(true)
+      setTimeout(() => setShowBirds(false), 4500)
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Could not submit RSVP right now.")
     } finally {
@@ -156,6 +219,70 @@ export function RSVPForm() {
   }
 
   return (
+    <>
+    {/* ── Bird flock overlay ── */}
+    {showBirds && (
+      <>
+        <style>{`
+          @keyframes wingBeat {
+            0%, 100% { transform: scaleY(1); }
+            50%       { transform: scaleY(0.22); }
+          }
+          ${BIRD_CSS}
+          ${FW_CSS}
+        `}</style>
+
+        {/* Birds — burst from screen centre */}
+        <div style={{ position: "fixed", top: "50%", left: "50%", pointerEvents: "none", zIndex: 9999 }}>
+          {BIRDS.map((b, i) => (
+            <div
+              key={i}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                animation: `bf${i} ${b.dur}ms cubic-bezier(0.15,0,0.55,1) ${b.delay}ms both`,
+              }}
+            >
+              <div style={{ animation: `wingBeat ${b.wb}ms ease-in-out infinite` }}>
+                <BirdSVG size={b.size} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Fireworks — fixed viewport positions left & right */}
+        {FIREWORKS.map((fw, fi) => (
+          <div
+            key={fi}
+            style={{
+              position: "fixed",
+              left: fw.left,
+              top: fw.top,
+              pointerEvents: "none",
+              zIndex: 9999,
+            }}
+          >
+            {fw.particles.map((p, pi) => (
+              <div
+                key={pi}
+                style={{
+                  position: "absolute",
+                  top: -p.size / 2,
+                  left: -p.size / 2,
+                  width: p.size,
+                  height: p.size,
+                  borderRadius: "50%",
+                  background: p.color,
+                  animation: `fw_${fi}_${pi} ${fw.dur}ms ease-out ${fw.delay}ms both`,
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </>
+    )}
+
     <section id="rsvp" style={{ background: "var(--secondary)", padding: "8rem 0", position: "relative", overflow: "hidden" }}>
       {/* Corner accents */}
       <CornerAccents size={64} />
@@ -201,7 +328,7 @@ export function RSVPForm() {
         <div
           className="env-card"
           style={{ perspective: "1200px", cursor: opened ? "default" : "pointer" }}
-          onClick={() => { if (!opened) { setOpened(true); playWhoosh() } }}
+          onClick={() => { if (!opened) setOpened(true) }}
           role={opened ? undefined : "button"}
           aria-label={opened ? undefined : "Open envelope to RSVP"}
         >
@@ -450,6 +577,7 @@ export function RSVPForm() {
         </div>
       </div>
     </section>
+    </>
   )
 }
 

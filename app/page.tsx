@@ -10,6 +10,7 @@ import { IntroAnimation } from "@/components/wedding/intro-animation"
 import { SiteChrome } from "@/components/wedding/site-chrome"
 import { MarqueeBand } from "@/components/wedding/marquee-band"
 import { CountdownTimer } from "@/components/wedding/countdown-timer"
+import { RegistrySection } from "@/components/wedding/registry-section"
 
 export default function WeddingPage() {
   return (
@@ -24,6 +25,7 @@ export default function WeddingPage() {
       <PhotoGallery />
       <EventDetails />
       <Location />
+      <RegistrySection />
       <RSVPForm />
       <Footer />
     </main>
