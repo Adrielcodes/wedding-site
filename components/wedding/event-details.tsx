@@ -113,22 +113,22 @@ export function EventDetails() {
                 <div className="flex items-center gap-3 mb-3">
                   <Clock className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
                   <span className="font-sans text-white/70" style={{ fontSize: "0.85rem" }}>
-                    4:00 PM — Ceremony
+                    4:00 PM — Guest Arrival
                   </span>
                 </div>
                 <p className="font-sans text-white/55 leading-relaxed pl-6" style={{ fontSize: "0.88rem" }}>
-                  Exchange of vows in an intimate garden setting, surrounded by lush tropical landscapes at Cinco Farm Gardens.
+                  Please arrive by 4:00 PM to park, find your seat, and settle in before the ceremony begins.
                 </p>
               </div>
               <div>
                 <div className="flex items-center gap-3 mb-3">
                   <Clock className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
                   <span className="font-sans text-white/70" style={{ fontSize: "0.85rem" }}>
-                    6:00 PM — Reception
+                    5:00 PM — Ceremony
                   </span>
                 </div>
                 <p className="font-sans text-white/55 leading-relaxed pl-6" style={{ fontSize: "0.88rem" }}>
-                  An evening of fine dining, dancing, and celebration under the stars at the beautiful Cinco Farm Gardens estate.
+                  Exchange of vows in an intimate garden setting at Cinco Farm Gardens, followed by dinner, dancing, and celebration under the stars.
                 </p>
               </div>
             </div>

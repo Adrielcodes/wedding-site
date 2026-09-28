@@ -118,7 +118,7 @@ export function CountdownTimer() {
 
   useEffect(() => {
     setMounted(true)
-    const weddingDate = new Date("2027-05-01T16:00:00")
+    const weddingDate = new Date("2027-07-02T17:00:00-04:00") // 5:00 PM ceremony, Miami time (EDT)
 
     const tick = () => {
       const diff = weddingDate.getTime() - Date.now()
@@ -219,7 +219,7 @@ export function CountdownTimer() {
                   color: "rgba(245,237,224,0.35)",
                 }}
               >
-                May 1, 2027 · Miami, FL
+                July 2, 2027 · Miami, FL
               </p>
               <span style={{ display: "inline-block", width: 60, height: 1, background: "var(--accent)" }} />
             </div>

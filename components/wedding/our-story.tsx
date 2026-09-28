@@ -150,7 +150,7 @@ export function OurStory() {
               What started as a chaotic Christmas game turned into a rooftop cinema date, spontaneous sushi nights, and a beachside proposal in Puerto Rico — proof that the best love stories begin unexpectedly.
             </p>
             <p className="font-sans text-muted-foreground leading-relaxed" style={{ fontSize: "0.95rem" }}>
-              On May 1, 2027, in Miami, FL, we invite you to witness the next chapter of our forever.
+              On July 2, 2027, in Miami, FL, we invite you to witness the next chapter of our forever.
             </p>
             <div className="flex items-center gap-4 mt-8">
               <span className="gold-divider" />

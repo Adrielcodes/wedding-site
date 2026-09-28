@@ -41,7 +41,7 @@ export function Footer() {
             Zamirah &amp; Adriel
           </h2>
           <p className="font-sans text-white/40" style={{ fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase" }}>
-            May 1, 2027 &nbsp;·&nbsp; Miami, Florida
+            July 2, 2027 &nbsp;·&nbsp; Miami, Florida
           </p>
         </div>
 

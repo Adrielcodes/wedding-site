@@ -60,7 +60,7 @@ const travelTips = [
   {
     icon: Hotel,
     title: "Accommodation",
-    description: "Several hotels are available nearby in the Homestead and South Miami area. We recommend booking early as May is a popular travel season in South Florida.",
+    description: "Several hotels are available nearby in the Homestead and South Miami area. We recommend booking early, and plan for July heat: expect a hot, humid South Florida evening.",
   },
 ]
 

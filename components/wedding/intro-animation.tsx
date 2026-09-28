@@ -260,7 +260,7 @@ export function IntroAnimation() {
             animation: "introDate 1.4s cubic-bezier(0.16,1,0.3,1) 1.8s forwards",
           }}
         >
-          May 1, 2027 · Miami, FL
+          July 2, 2027 · Miami, FL
         </p>
 
         {/* Growing line */}

@@ -5,7 +5,7 @@
  */
 export function MarqueeBand() {
   const phrase = "Zamirah & Adriel"
-  const sub = "May 1, 2027 · Miami, FL"
+  const sub = "July 2, 2027 · Miami, FL"
 
   const Item = () => (
     <span

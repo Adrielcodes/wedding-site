@@ -156,7 +156,7 @@ export function HeroSection() {
             className="font-sans text-white/40 tracking-[0.55em] uppercase"
             style={{ fontSize: "0.6rem" }}
           >
-            May 1, 2027 &nbsp;·&nbsp; Miami, FL
+            July 2, 2027 &nbsp;·&nbsp; Miami, FL
           </p>
           <span className="hidden sm:inline-block" style={{ width: 40, height: 1, background: "rgba(201,168,76,0.4)" }} />
         </div>
