@@ -2,7 +2,7 @@
 
 A wedding website for our guests: event details, our story, photo gallery, travel/location info, a live registry, and an RSVP form that emails responses straight to our inbox.
 
-**Live site:** https://wedding-site-lyart-delta.vercel.app
+**Live site:** https://zamiandadriel.com
 
 ## Features
 
